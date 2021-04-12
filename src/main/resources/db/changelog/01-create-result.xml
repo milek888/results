@@ -1,0 +1,27 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.7"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.7
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.7.xsd">
+
+<changeSet id="01" author="mmazurek">
+
+    <createTable tableName="result" remarks="A table to contain all results">
+        <column name="id" type="number">
+            <constraints nullable="false" primaryKey="true" primaryKeyName="result_PK"/>
+        </column>
+        <column name="forename" type="varchar(255)">
+            <constraints nullable="false" unique="false"/>
+        </column>
+        <column name="course" type="varchar(255)">
+            <constraints nullable="false"/>
+        </column>
+        <column name="result" type="int">
+            <constraints nullable="false"/>
+        </column>
+        <column name="description" type="varchar(255)">
+        </column>
+    </createTable>
+
+</changeSet>
+</databaseChangeLog>

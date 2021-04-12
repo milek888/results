@@ -1,0 +1,38 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.7"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.7
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.7.xsd">
+
+    <changeSet id="02" author="mmazurek">
+
+        <createTable tableName="revard" remarks="A table to contains revards for results">
+
+            <column name="id" type="number">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="revard_PK"/>
+            </column>
+
+            <column name="result_id" type="number">
+            </column>
+
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" unique="false"/>
+            </column>
+
+            <column name="course" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="amount" type="int">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="description" type="varchar(255)">
+            </column>
+
+        </createTable>
+        <addForeignKeyConstraint baseTableName="revard" baseColumnNames="result_id"
+                                 constraintName="result_id_fk"
+                                 referencedTableName="result" referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

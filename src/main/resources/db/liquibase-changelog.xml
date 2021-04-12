@@ -1,0 +1,22 @@
+<!--https://medium.com/@harittweets/evolving-your-database-using-spring-boot-and-liquibase-844fcd7931da-->
+<!--https://bykowski.pl/liquibase-zarzadzanie-zmianami-w-bazach-danych/-->
+<!--https://github.com/hhimanshu/spring-boot-liquibase/blob/master/src/main/resources/db/changelog/02-insert-data-books.xml-->
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <include file="changelog/01-create-result.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/02-create-revard.xml" relativeToChangelogFile="true"/>
+<!--    <include file="changelog/03-create-revard-fk.xml" relativeToChangelogFile="true"/> to jest juz tworzone w poprzednim pliku 02-create-revard.xml-->
+    <include file="changelog/04-insert-data-result.xml" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>
+
+<!-- sekwencja-->
+<!-- CREATE SEQUENCE  "SCOTT"."RESULT_SEQ"  MINVALUE 1 MAXVALUE 999999999999999999999999999 INCREMENT BY 1 START WITH 21 CACHE 20 NOORDER  NOCYCLE ;-->
+<!-- CREATE SEQUENCE  "SCOTT"."REVARD_SEQ"  MINVALUE 5 MAXVALUE 999999999999999999999999999 INCREMENT BY 1 START WITH 21 CACHE 20 NOORDER  NOCYCLE ;-->
+
+
