@@ -1,6 +1,8 @@
 package org.milosz.results.service;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.AllArgsConstructor;
+import org.milosz.results.model.QResult;
 import org.milosz.results.model.Result;
 import org.milosz.results.model.ResultStatisticResource;
 import org.milosz.results.repository.ResultRepository;
@@ -9,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 @AllArgsConstructor
@@ -58,5 +62,14 @@ public class ResultServiceImpl implements ResultService {
     @Override
     public Map<String, Integer> findResultsByCourseQueryDslMax() {
         return resultRepository.findResultsByCourseQueryDslMax();
+    }
+
+    @Override
+    //https://www.logicbig.com/tutorials/spring-framework/spring-data/query-dsl-basic.html
+    public List<Result> findResultsUseQuerydslPredicateExecutor() {
+        BooleanExpression booleanExpression = QResult.result1.forename.eq("mazurek");
+
+        return StreamSupport.stream(resultRepository.findAll(booleanExpression).spliterator(), false)
+                .collect(Collectors.toList());
     }
 }

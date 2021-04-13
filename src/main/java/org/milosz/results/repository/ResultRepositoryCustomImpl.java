@@ -2,8 +2,10 @@ package org.milosz.results.repository;
 
 import com.querydsl.core.Tuple;
 import com.querydsl.core.group.GroupBy;
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.AllArgsConstructor;
+import org.hibernate.criterion.SubqueryExpression;
 import org.milosz.results.model.QResult;
 import org.milosz.results.model.QRevard;
 import org.milosz.results.model.Result;
@@ -148,6 +150,8 @@ public class ResultRepositoryCustomImpl implements ResultRepositoryCustom {
         return results;
     }
 
+/*  Mozna stosowac jak mamy pomapowane relacjie
+     https://stackoverflow.com/questions/47701172/how-to-join-multiple-querydsl-tables/47702568*/
     public  List<Tuple> findResultsByCourseQueryDslJoinWhenMappingOfRelations() {
         QResult result = QResult.result1;
         QRevard revard = QRevard.revard;
@@ -186,6 +190,27 @@ public class ResultRepositoryCustomImpl implements ResultRepositoryCustom {
 
         return results;
     }
+
+
+//----------------------------------------------------------QueryDsl subqueries----------------------------------------------------
+
+    public  List<Tuple> findResultsByCourseQueryDslSubquery() {
+        QResult result = QResult.result1;
+        QRevard revard = QRevard.revard;
+
+        List<Tuple> results = new JPAQueryFactory(entityManager)
+                .select(result.id, result.course,result.forename, revard.id, revard.name, revard.amount, revard.result_id)
+                .from(result)
+                .where(result.id.in(JPAExpressions
+                        .select(revard.result_id)
+                        .from(revard))
+                ).fetch();
+
+        return results;
+    }
+
+//----------------------------------------------------------------------------------------------------------------------
+
 
 
 }

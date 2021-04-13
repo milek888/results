@@ -65,4 +65,11 @@ class ResultRepositoryCustomImplTest {
         List<Tuple>  results = resultRepositoryCustom.findResultsByCourseQueryDslJoinWhenMappingOfRelations();
         Assertions.assertEquals(1,1);
     }
+
+    @Test
+    void findResultsByCourseQueryDslSubquery() {
+        List<Tuple>  results = resultRepositoryCustom.findResultsByCourseQueryDslSubquery();
+        Assertions.assertEquals(1,1);
+    }
+
 }

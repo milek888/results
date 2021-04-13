@@ -24,4 +24,7 @@ public interface ResultService {
     Map<String, Long> findResultsByCourseQueryDsl2();
 
     Map<String, Integer> findResultsByCourseQueryDslMax();
+
+    //https://www.logicbig.com/tutorials/spring-framework/spring-data/query-dsl-basic.html
+    List<Result> findResultsUseQuerydslPredicateExecutor();
 }
